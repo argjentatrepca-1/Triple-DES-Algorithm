@@ -1,0 +1,14 @@
+# Folderat e sistemit 
+bin/
+obj/
+
+# Skedarët e konfigurimit të Visual Studio
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.sln.docstates
+
+# Skedarët e panevojshëm të sistemit operativ
+Thumbs.db
+.DS_Store
