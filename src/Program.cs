@@ -22,7 +22,12 @@ namespace Triple_DES_Algorithm
                 string keyInput = Console.ReadLine() ?? "";
                 
                 
-                byte[] key = Encoding.UTF8.GetBytes(keyInput.PadRight(16).Substring(0, 16));
+                byte[] rawKey = Encoding.UTF8.GetBytes(keyInput.PadRight(16).Substring(0, 16));
+
+                byte[] key = new byte[24];
+
+                Array.Copy(rawKey, 0, key, 0, 16);
+                Array.Copy(rawKey, 0, key, 16, 8);
                 byte[] iv = Encoding.UTF8.GetBytes("87654321"); 
 
                 
