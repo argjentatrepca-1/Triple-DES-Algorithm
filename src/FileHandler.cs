@@ -17,3 +17,15 @@ namespace Triple_DES_Algorithm
                     Console.WriteLine("[!] Gabim: File-i hyres nuk ekziston!");
                     return;
                 }
+ // Konverton transformer ne ICryptoTransform
+                ICryptoTransform cryptoTransform = transformer as ICryptoTransform;
+
+                if (cryptoTransform == null)
+                {
+                    Console.WriteLine("[!] Gabim: Transformer i pavlefshëm.");
+                    return;
+                }
+
+                //  Hap file-in hyres dhe dales
+                using (FileStream fsInput = new FileStream(inputFile, FileMode.Open, FileAccess.Read))
+                using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
