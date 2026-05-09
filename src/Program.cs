@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 using System.Text;
-
+using System.Security.Cryptography;
 namespace Triple_DES_Algorithm
 {
     class Program
@@ -46,7 +46,7 @@ namespace Triple_DES_Algorithm
 
                 // placeholder per file-in CryptoEngine.cs
                 object? transformer = null;
-                Type? cryptoType = Type.GetType("Triple_DES_Algorithm.CryptoEngine");
+                Type? cryptoType = typeof(Triple_DES_Algorithm.CryptoEngine);
 
                 if (cryptoType != null)
                 {
@@ -63,7 +63,7 @@ namespace Triple_DES_Algorithm
                 }
 
                 // placeholder (FileHandler)
-                Type? fileHandlerType = Type.GetType("Triple_DES_Algorithm.FileHandler");
+                Type? fileHandlerType = typeof(Triple_DES_Algorithm.FileHandler);
 
                 if (fileHandlerType != null && transformer != null)
                 {
@@ -75,13 +75,10 @@ namespace Triple_DES_Algorithm
                         Console.WriteLine($"\n[INFO] Fajlli i ri është krijuar: {resultFile}");
                     }
                 }
-                else if (fileHandlerType == null)
+                 
+                else 
                 {
-                    Console.WriteLine("[ ] FileHandler: Duke pritur implementimin nga Personi 2...");
-                }
-                else if (transformer == null)
-                {
-                    Console.WriteLine("[!] FileHandler u gjet, por nuk mund të nisë pa CryptoEngine.");
+                    Console.WriteLine("[!] Gabim: Nuk mund të nisë procesimi pa të dy modulet.");
                 }
 
                 Console.WriteLine("--------------------------------------------------\n");
@@ -90,9 +87,9 @@ namespace Triple_DES_Algorithm
             }
             catch (Exception ex)
             {
-                // Kodi i perkohshem 
-                Console.WriteLine($"\n[NJOFTIM] Sistemi është në pritje të integrimit të plotë.");
-                Console.WriteLine($"Detaje: {ex.Message}");
+                
+        
+                Console.WriteLine($"\n[gabim] {ex.Message}");
                 Console.ReadKey();
             }
         }
