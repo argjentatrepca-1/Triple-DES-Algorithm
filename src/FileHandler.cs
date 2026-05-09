@@ -29,3 +29,22 @@ namespace Triple_DES_Algorithm
                 //  Hap file-in hyres dhe dales
                 using (FileStream fsInput = new FileStream(inputFile, FileMode.Open, FileAccess.Read))
                 using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
+                                    // CryptoStream per enkriptim/dekriptim
+                using (CryptoStream cryptoStream =
+                    new CryptoStream(fsOutput, cryptoTransform, CryptoStreamMode.Write))
+                {
+                    // Kopjo te dhenat nga input ne crypto stream
+                    fsInput.CopyTo(cryptoStream);
+                }
+
+                Console.WriteLine("[✔] FileHandler: Procesimi u krye me sukses!");
+                Console.WriteLine($"[✔] File i ri u krijua: {outputFile}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[!] Gabim gjatë procesimit të file-it:");
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+}
