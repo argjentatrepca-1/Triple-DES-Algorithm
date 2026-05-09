@@ -12,3 +12,12 @@ obj/
 # Skedarët e panevojshëm të sistemit operativ
 Thumbs.db
 .DS_Store
+# Skedarët e testimit (Enkriptimi/Dekriptimi)
+*.txt
+*.enc
+*.dec
+*.bak
+
+# Përjashtim: Mos i injoro skedarët dokumentues
+!README.md
+!LICENSE.md
