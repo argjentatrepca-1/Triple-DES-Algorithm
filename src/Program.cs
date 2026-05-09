@@ -49,7 +49,7 @@ namespace Triple_DES_Algorithm
 
                 Console.WriteLine("\n--- KONTROLLI I MODULEVE (Integration Status) ---");
 
-                // placeholder per file-in CryptoEngine.cs
+                
                 object? transformer = null;
                 Type? cryptoType = typeof(Triple_DES_Algorithm.CryptoEngine);
 
