@@ -7,6 +7,12 @@ namespace Triple_DES_Algorithm
     {
         public static ICryptoTransform GetTransformer(byte[] key, byte[] iv, bool encrypt)
         {
+            if (key == null || key.Length != 24)
+                throw new ArgumentException("Çelësi duhet të jetë 24 bytes për TripleDES.");
+
+            if (iv == null || iv.Length != 8)
+                throw new ArgumentException("IV duhet të jetë 8 bytes për TripleDES.");
+
             TripleDES tripleDES = TripleDES.Create();
 
             tripleDES.Key = key;
@@ -18,10 +24,8 @@ namespace Triple_DES_Algorithm
             {
                 return tripleDES.CreateEncryptor();
             }
-            else
-            {
-                return tripleDES.CreateDecryptor();
-            }
+
+            return tripleDES.CreateDecryptor();
         }
     }
 }
