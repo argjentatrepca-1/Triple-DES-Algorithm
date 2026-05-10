@@ -67,7 +67,7 @@ namespace Triple_DES_Algorithm
                     Console.WriteLine("[ ] CryptoEngine: Duke pritur implementimin nga CryptoEngine.cs ...");
                 }
 
-                // placeholder (FileHandler)
+                
                 Type? fileHandlerType = typeof(Triple_DES_Algorithm.FileHandler);
 
                 if (fileHandlerType != null && transformer != null)
