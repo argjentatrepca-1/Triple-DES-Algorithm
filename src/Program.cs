@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 using System.Text;
-
+using System.Security.Cryptography;
 namespace Triple_DES_Algorithm
 {
     class Program
@@ -22,7 +22,12 @@ namespace Triple_DES_Algorithm
                 string keyInput = Console.ReadLine() ?? "";
                 
                 
-                byte[] key = Encoding.UTF8.GetBytes(keyInput.PadRight(16).Substring(0, 16));
+                byte[] rawKey = Encoding.UTF8.GetBytes(keyInput.PadRight(16).Substring(0, 16));
+
+                byte[] key = new byte[24];
+
+                Array.Copy(rawKey, 0, key, 0, 16);
+                Array.Copy(rawKey, 0, key, 16, 8);
                 byte[] iv = Encoding.UTF8.GetBytes("87654321"); 
 
                 
@@ -44,9 +49,9 @@ namespace Triple_DES_Algorithm
 
                 Console.WriteLine("\n--- KONTROLLI I MODULEVE (Integration Status) ---");
 
-                // placeholder per file-in CryptoEngine.cs
+                
                 object? transformer = null;
-                Type? cryptoType = Type.GetType("Triple_DES_Algorithm.CryptoEngine");
+                Type? cryptoType = typeof(Triple_DES_Algorithm.CryptoEngine);
 
                 if (cryptoType != null)
                 {
@@ -62,8 +67,8 @@ namespace Triple_DES_Algorithm
                     Console.WriteLine("[ ] CryptoEngine: Duke pritur implementimin nga CryptoEngine.cs ...");
                 }
 
-                // placeholder (FileHandler)
-                Type? fileHandlerType = Type.GetType("Triple_DES_Algorithm.FileHandler");
+                
+                Type? fileHandlerType = typeof(Triple_DES_Algorithm.FileHandler);
 
                 if (fileHandlerType != null && transformer != null)
                 {
@@ -75,13 +80,10 @@ namespace Triple_DES_Algorithm
                         Console.WriteLine($"\n[INFO] Fajlli i ri është krijuar: {resultFile}");
                     }
                 }
-                else if (fileHandlerType == null)
+                 
+                else 
                 {
-                    Console.WriteLine("[ ] FileHandler: Duke pritur implementimin nga Personi 2...");
-                }
-                else if (transformer == null)
-                {
-                    Console.WriteLine("[!] FileHandler u gjet, por nuk mund të nisë pa CryptoEngine.");
+                    Console.WriteLine("[!] Gabim: Nuk mund të nisë procesimi pa të dy modulet.");
                 }
 
                 Console.WriteLine("--------------------------------------------------\n");
@@ -90,9 +92,9 @@ namespace Triple_DES_Algorithm
             }
             catch (Exception ex)
             {
-                // Kodi i perkohshem 
-                Console.WriteLine($"\n[NJOFTIM] Sistemi është në pritje të integrimit të plotë.");
-                Console.WriteLine($"Detaje: {ex.Message}");
+                
+        
+                Console.WriteLine($"\n[gabim] {ex.Message}");
                 Console.ReadKey();
             }
         }
